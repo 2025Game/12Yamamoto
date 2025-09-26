@@ -37,6 +37,7 @@
     <ClCompile Include="CSound.cpp" />
     <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="CUi.cpp" />
+    <ClCompile Include="CVector.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
