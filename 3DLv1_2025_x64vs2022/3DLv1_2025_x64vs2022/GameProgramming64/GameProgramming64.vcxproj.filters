@@ -137,5 +137,8 @@
     <ClInclude Include="CCamera.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="CVector.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

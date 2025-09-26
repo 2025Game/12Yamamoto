@@ -59,6 +59,7 @@
     <ClInclude Include="CSound.h" />
     <ClInclude Include="CTexture.h" />
     <ClInclude Include="CUi.h" />
+    <ClInclude Include="CVector.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
