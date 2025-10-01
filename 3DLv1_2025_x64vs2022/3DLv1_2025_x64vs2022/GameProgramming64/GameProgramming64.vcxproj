@@ -35,7 +35,9 @@
     <ClCompile Include="CPoint.cpp" />
     <ClCompile Include="CRectangle.cpp" />
     <ClCompile Include="CSound.cpp" />
+    <ClCompile Include="CT.riangle.cpp" />
     <ClCompile Include="CTexture.cpp" />
+    <ClCompile Include="CTriangle.cpp" />
     <ClCompile Include="CUi.cpp" />
     <ClCompile Include="CVector.cpp" />
     <ClCompile Include="main.cpp" />
@@ -62,6 +64,9 @@
     <ClInclude Include="CUi.h" />
     <ClInclude Include="CVector.h" />
     <ClInclude Include="main.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CT.riangle.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
