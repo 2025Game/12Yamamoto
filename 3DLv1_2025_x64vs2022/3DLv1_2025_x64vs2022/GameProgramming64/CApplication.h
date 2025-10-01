@@ -8,7 +8,7 @@
 #include "CMiss.h"
 #include "CCharacterManager.h"
 #include "CGame.h"
-
+#include"CVector.h"
 class CApplication
 {
 public:
@@ -40,4 +40,5 @@ private:
 	CBullet* mpBullet;
 	static CTexture mTexture;
 	CEnemy* mpEnemy;
+	CVector mEye;
 };
