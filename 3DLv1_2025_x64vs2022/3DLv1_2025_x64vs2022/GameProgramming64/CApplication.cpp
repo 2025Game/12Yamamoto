@@ -88,10 +88,10 @@ void CApplication::Update()
 	glVertex3f(0.0f, 1.0f, 0.0f);
 	glVertex3f(-0.5f, 0.0f, 0.0f);
 //
-	glNormal3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(0.0f,-0.5f, 0.0f);
+	glNormal3f(0.0f, 0.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f,0.0f, 1.0f);
+	glVertex3f(0.0f, -0.5f, 0.0f);
 	//法線（面の向き）の設定
 	glNormal3f(n.X(), n.Y(), n.Z());
 	//頂点座標の設定
@@ -137,7 +137,7 @@ void CApplication::Update()
 	//三角形クラスのインスタンス作成
 	CTriangle t2;
 	//法線と頂点の設定
-	t2.Vertex(CVector(0.0f, 0.5f, 1.0f), CVector(0.0f, 0.0f, 2.0f), CVector(0.0f, -0.5f, 1.0f));
+	t2.Vertex(CVector(0.0f,-0.5f, 1.0f), CVector(0.0f, 0.5f, 1.0f), CVector(0.0f, 0.0f, 2.0f));
 	t2.Normal(CVector(1.0f, 0.0f, 0.0f));
 	//三角形の描画
 	t2.Render();
