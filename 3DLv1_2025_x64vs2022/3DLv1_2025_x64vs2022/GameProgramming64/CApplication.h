@@ -9,6 +9,7 @@
 #include "CCharacterManager.h"
 #include "CGame.h"
 #include"CVector.h"
+#include"CModel.h"
 class CApplication
 {
 public:
@@ -41,4 +42,6 @@ private:
 	static CTexture mTexture;
 	CEnemy* mpEnemy;
 	CVector mEye;
+	//モデルクラスのインスタンス制作
+	CModel mModel;
 };
