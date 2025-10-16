@@ -30,15 +30,15 @@
     <ClCompile Include="CFont.cpp" />
     <ClCompile Include="CGame.cpp" />
     <ClCompile Include="CInput.cpp" />
+    <ClCompile Include="CMaterial.cpp" />
     <ClCompile Include="CModel.cpp" />
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CPlayer2.cpp" />
     <ClCompile Include="CPoint.cpp" />
     <ClCompile Include="CRectangle.cpp" />
     <ClCompile Include="CSound.cpp" />
-    <ClCompile Include="CT.riangle.cpp" />
-    <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="CTriangle.cpp" />
+    <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="CUi.cpp" />
     <ClCompile Include="CVector.cpp" />
     <ClCompile Include="main.cpp" />
@@ -55,6 +55,7 @@
     <ClInclude Include="CFont.h" />
     <ClInclude Include="CGame.h" />
     <ClInclude Include="CInput.h" />
+    <ClInclude Include="CMaterial.h" />
     <ClInclude Include="CMiss.h" />
     <ClInclude Include="CModel.h" />
     <ClInclude Include="CPlayer.h" />
@@ -68,7 +69,7 @@
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="CT.riangle.h" />
+    <None Include="CTriangle.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

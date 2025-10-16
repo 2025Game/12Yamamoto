@@ -5,7 +5,7 @@
 //OpenGL
 #include "glut.h"
 #include "CVector.h"
-#include"CT.riangle.h"
+#include "CTriangle.h"
 //モデルデータの指定
 #define MODEL_OBJ "res\\obj.obj", "res\\obj.mtl"
 #define SOUND_BGM "res\\mario.wav" //BGM音声ファイル
