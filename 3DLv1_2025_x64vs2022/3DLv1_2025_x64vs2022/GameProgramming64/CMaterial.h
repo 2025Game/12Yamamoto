@@ -1,13 +1,19 @@
 #ifndef CMATERIAL_H
 #define CMATERIAL_H
 #define MATERIAL_NAME_LEN 64 //名前の長さ
-
+#include"CTexture.h"
 /*
 マテリアルクラス
 マテリアルのデータを扱う
 */
 class CMaterial {
 public:
+	//テクスチャ
+	CTexture mTexture;
+	//テクスチャの取得
+	CTexture* Texture();
+	//マテリアを無効化する
+	void Disabled();
 	//デフォルトコンストラクタ
 	CMaterial();
 	//マテリアルを有効にする

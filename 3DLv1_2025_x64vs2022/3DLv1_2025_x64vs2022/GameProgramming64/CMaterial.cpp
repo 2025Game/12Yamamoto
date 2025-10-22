@@ -20,6 +20,23 @@ char* strncpy(char* str1, const char* str2, int len)
 	str1[i] = '\0'; //コピー先の文字列に終わり
 	return str1; //コピー先の先頭アドレスを返却
 }
+CTexture* CMaterial::Texture()
+{
+	return &mTexture;
+}
+//マテリアの定義を無効に
+void CMaterial::Disabled() {
+	//テクスチャ有り
+	if (mTexture.Id())
+	{
+		//アルファブレンドを無効
+		glDisable(GL_BLEND);
+		//テクスチャのバインドを解く
+		glBindTexture(GL_TEXTURE_2D, 0);
+		//テクスチャを無効にする
+		glDisable(GL_TEXTURE_2D);
+	}
+}
 //デフォルトコンストラクタ
 CMaterial::CMaterial() {
 	//名前を0で埋め
@@ -32,6 +49,18 @@ CMaterial::CMaterial() {
 void CMaterial::Enabled() {
 	//拡散光の設定
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, mDiffuse);
+	//テクスチャあり
+	if (mTexture.Id())
+	{
+		//テクスチャを使用可能に
+		glEnable(GL_TEXTURE_2D);
+		//テクスチャをバインドする
+		glBindTexture(GL_TEXTURE_2D, mTexture.Id());
+		//アルファブレンドを有効にする
+		glEnable(GL_BLEND);
+		//ブレンド方法を指定
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	}
 }
 
 //マテリアルの名前の取得
