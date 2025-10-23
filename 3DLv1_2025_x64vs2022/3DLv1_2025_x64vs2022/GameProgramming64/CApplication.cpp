@@ -150,5 +150,6 @@ void CApplication::Update()
 	//ŽOŠpŒ`‚Ì•`‰æ
 	t2.Render();
 	*/
+
 }
 
