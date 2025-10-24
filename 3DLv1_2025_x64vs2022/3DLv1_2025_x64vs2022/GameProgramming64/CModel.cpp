@@ -118,10 +118,10 @@ void CModel::Load(const char* obj, const char* mtl){
 	//ファイルの最後になるとNULLを返す
 	while (fgets(buf, sizeof(buf), fp) != NULL) {
 		//入力した値をコンソールに出力する
-		printf("%s", buf);
+		//printf("%s", buf);
 	
 		//入力した値をコンソールに出力する
-		printf("%s", buf);
+		//printf("%s", buf);
 		//データを分割する
 		char str[4][64] = { "", "", "", "" };
 		//文字列からデータを4つ変数へ代入する

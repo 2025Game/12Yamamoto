@@ -6,6 +6,7 @@
 #include "glut.h"
 #include "CVector.h"
 #include "CTriangle.h"
+#include "CMatrix.h"
 //背景モデルデータの指定
 #define MODEL_BACKGROUND  "res\\sky.obj", "res\\sky.mtl"
 //モデルデータの指定
@@ -28,6 +29,8 @@ CCharacterManager* CApplication::CharacterManager()
 
 void CApplication::Start()
 {
+	CMatrix matrix;
+	matrix.Print();
 	mBackGround.Load(MODEL_BACKGROUND);
 	mEye = CVector(1.0f, 2.0f, 3.0f);
 	//モデルファイルの入力
@@ -150,6 +153,5 @@ void CApplication::Update()
 	//三角形の描画
 	t2.Render();
 	*/
-
 }
 
