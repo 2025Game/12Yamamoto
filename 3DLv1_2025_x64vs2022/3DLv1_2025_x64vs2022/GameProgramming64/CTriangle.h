@@ -2,11 +2,15 @@
 #define CTRIANGLE_H
 
 #include "CVector.h"
+
 /*
 三角形クラス
 */
 class CTriangle {
 public:
+	//描画
+//Render(行列)
+	void Render(const CMatrix& m);
 	//UV設定
 	void UV(const CVector& v0, const CVector& v1, const CVector& v2);
 	//マテリアル番号の取得
