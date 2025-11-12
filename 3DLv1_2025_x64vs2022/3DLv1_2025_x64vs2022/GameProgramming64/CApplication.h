@@ -10,6 +10,7 @@
 #include "CGame.h"
 #include"CVector.h"
 #include"CModel.h"
+#include "CCharacter3.h"
 class CApplication
 {
 public:
@@ -28,10 +29,11 @@ public:
 	//ŒJ‚è•Ô‚µÀs‚·‚éƒvƒƒOƒ‰ƒ€
 	void Update();
 private:
+	CCharacter3 mPlayer; //‰Û‘è‚P‚U
 	CModel mBackGround; //”wŒiƒ‚ƒfƒ‹
 	CSound mSoundBgm;
 	CSound mSoundOver;
-
+	CCharacter3 mCharacter;
 	CGame* mpGame;
 	static CCharacterManager mCharacterManager;
 	EState mState;
