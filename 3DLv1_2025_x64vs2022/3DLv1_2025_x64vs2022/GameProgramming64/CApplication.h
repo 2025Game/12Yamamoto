@@ -29,11 +29,11 @@ public:
 	//ŒJ‚è•Ô‚µÀs‚·‚éƒvƒƒOƒ‰ƒ€
 	void Update();
 private:
-	CCharacter3 mPlayer; //‰Û‘è‚P‚U
+	CCharacter3 mCharacter;
+	CPlayer mPlayer; //‰Û‘è‚P‚U
 	CModel mBackGround; //”wŒiƒ‚ƒfƒ‹
 	CSound mSoundBgm;
 	CSound mSoundOver;
-	CCharacter3 mCharacter;
 	CGame* mpGame;
 	static CCharacterManager mCharacterManager;
 	EState mState;

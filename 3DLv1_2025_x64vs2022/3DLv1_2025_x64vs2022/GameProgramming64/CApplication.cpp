@@ -38,6 +38,10 @@ void CApplication::Start()
 	mEye = CVector(1.0f, 2.0f, 3.0f);
 	//モデルファイルの入力
 	mModel.Load(MODEL_OBJ);
+	mPlayer.Model(&mModel);
+	mPlayer.Position(CVector(0.0f, 0.0f, -3.0f)); //位置の設定
+	mPlayer.Rotation(CVector(0.0f, 180.0f, 0.0f)); //回転の設定
+	mPlayer.Scale(CVector(0.1f, 0.1f, 0.1f)); //拡大縮小の設定
 }
 
 void CApplication::Update()
@@ -79,15 +83,11 @@ void CApplication::Update()
 	//視点の設定
 	//gluLookAt(視点X, 視点Y, 視点Z, 中心X, 中心Y, 中心Z, 上向X, 上向Y, 上向Z)
 	gluLookAt(mEye.X(), mEye.Y(), mEye.Z(),0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-	CTransform trans; //変換行列インスタンスの作成
-	trans.Position(CVector(0.0f, 0.0f, -3.0f)); //位置の設定
-	trans.Rotation(CVector(0.0f, 180.0f, 0.0f)); //回転の設定
-	trans.Scale(CVector(0.1f, 0.1f, 0.1f)); //拡大縮小の設定
-	trans.Update(); //行列の更新
-	mModel.Render(trans.Matrix());
 	mCharacter.Update();
 	mCharacter.Render();
 	mBackGround.Render();
+	mPlayer.Update();
+	mPlayer.Render();
 	/*
 	//描画開始
 	//glBegin(形)
