@@ -80,4 +80,47 @@ void CTriangle::Render() {
 	glEnd();
 }
 
+const CVector& CTriangle::V0() const
+{
+	return mV[0];// TODO: return ステートメントをここに挿入します
+}
 
+const CVector& CTriangle::V1() const
+{
+	return mV[1];// TODO: return ステートメントをここに挿入します
+}
+
+const CVector& CTriangle::V2() const
+{
+	return mV[2];// TODO: return ステートメントをここに挿入します
+}
+
+const CVector& CTriangle::N0() const
+{
+	return mN[0];// TODO: return ステートメントをここに挿入します
+}
+
+const CVector& CTriangle::N1() const
+{
+	return mN[1];// TODO: return ステートメントをここに挿入します
+}
+
+const CVector& CTriangle::N2() const
+{
+	return mN[2];// TODO: return ステートメントをここに挿入します
+}
+
+const CVector& CTriangle::U0() const
+{
+	return mUv[0];// TODO: return ステートメントをここに挿入します
+}
+
+const CVector& CTriangle::U1() const
+{
+	return mUv[1];// TODO: return ステートメントをここに挿入します
+}
+
+const CVector& CTriangle::U2() const
+{
+	return mUv[2];// TODO: return ステートメントをここに挿入します
+}

@@ -88,6 +88,7 @@ void CApplication::Update()
 	mBackGround.Render();
 	mPlayer.Update();
 	mPlayer.Render();
+
 	/*
 	//•`‰æŠJŽn
 	//glBegin(Œ`)

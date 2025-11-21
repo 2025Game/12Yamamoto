@@ -6,12 +6,18 @@
 */
 class CMatrix {
 public:
+
+
+	//行列の取得
+	float* M() const;
 	//*演算子のオーバーロード
 	//CMatrix * CMatrix の演算結果を返す
 	const CMatrix operator*(const CMatrix& m) const;
+
 	//行列値の代入
 	//M(行数, 列数, 値)
 	void M(int row, int col, float value);
+
 	//移動行列の作成
 	//Translate(移動量X, 移動量Y, 移動量Z)
 	CMatrix Translate(float mx, float my, float mz);

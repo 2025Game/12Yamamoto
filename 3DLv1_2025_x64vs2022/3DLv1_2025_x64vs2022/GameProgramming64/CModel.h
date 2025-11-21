@@ -5,6 +5,7 @@
 //vectorのインクルード
 #include <vector>
 #include "CTriangle.h"
+#include "CVertex.h"
 /*
 モデルクラス
 モデルデータの入力や表示
@@ -23,6 +24,9 @@ public:
 	void Render();
 
 private:
+	//頂点の配列
+	CVertex* mpVertexes;
+	void CreateVertexBuffer();
 	//三角形の可変長配列
 	std::vector<CTriangle> mTriangles;
 	std::vector<CTriangle> normal;
