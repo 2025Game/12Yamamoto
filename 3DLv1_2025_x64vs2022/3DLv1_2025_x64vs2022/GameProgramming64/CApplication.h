@@ -47,4 +47,4 @@ private:
 	CVector mEye;
 	//モデルクラスのインスタンス制作
 	CModel mModel;
-};
+}; 
