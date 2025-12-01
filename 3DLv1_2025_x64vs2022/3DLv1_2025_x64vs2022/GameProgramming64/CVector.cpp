@@ -58,3 +58,7 @@ float CVector::Z() const
 {
 	return mZ;
 }
+
+
+
+

@@ -85,10 +85,20 @@ void CApplication::Update()
 	//gluLookAt(mEye.X(), mEye.Y(), mEye.Z(),0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 	//mCharacter.Update();
 	//mCharacter.Render();
-	mBackGround.Render();
-	mPlayer.Update();
-	mPlayer.Render();
 
+	mPlayer.Update();
+	//カメラのパラメータを作成する
+	CVector e, c, u;//視点、注視点、上方向
+	//視点を求める
+	e = mPlayer.Position()  + CVector(0, 1, -3) * mPlayer.MatrixRotate();
+		//注視点を求める
+	c = mPlayer.Position();
+	//上方向を求める
+	u = CVector (0, 1, 0)*mPlayer.MatrixRotate();
+		//カメラの設定
+		gluLookAt(e.X(), e.Y(), e.Z(), c.X(), c.Y(), c.Z(), u.X(), u.Y(), u.Z());
+	   mPlayer.Render();
+	   mBackGround.Render();
 	/*
 	//描画開始
 	//glBegin(形)
