@@ -1,5 +1,6 @@
 #ifndef CCHARACTER3_H
 #define CCHARACTER3_H
+#include"CTask.h"
 //変換行列クラスのインクルード
 #include "CTransform.h"
 //モデルクラスのインクルード
@@ -8,7 +9,7 @@
 キャラクタークラス
 ゲームキャラクタの基本的な機能を定義する
 */
-class CCharacter3 : public CTransform {
+class CCharacter3 : public CTransform, public CTask {
 public:
 	//モデルの設定
 	//Model(モデルクラスのポインタ)

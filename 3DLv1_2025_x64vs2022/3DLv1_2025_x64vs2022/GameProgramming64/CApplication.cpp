@@ -27,7 +27,11 @@ CCharacterManager* CApplication::CharacterManager()
 {
 	return &mCharacterManager;
 }
-
+CTaskManager CApplication::mTaskManager;
+CTaskManager* CApplication::TaskManager()
+{
+	return &mTaskManager;
+}
 void CApplication::Start()
 {
 	//mCharacter.Model(&mModel);
@@ -99,8 +103,12 @@ void CApplication::Update()
 		gluLookAt(e.X(), e.Y(), e.Z(), c.X(), c.Y(), c.Z(), u.X(), u.Y(), u.Z());
 	   mPlayer.Render();
 	   mBackGround.Render();
-	   mPlayer.bullet.Update();
-	   mPlayer.bullet.Render();
+	   //タスクマネージャの更新
+	   mTaskManager.Update();
+	   //タスクマネージャの描画
+	   mTaskManager.Render();
+	   //mPlayer.bullet.Update();
+	   //mPlayer.bullet.Render();
 
 	/*
 	//描画開始
