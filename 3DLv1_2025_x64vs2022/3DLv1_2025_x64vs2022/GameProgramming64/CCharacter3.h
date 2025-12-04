@@ -11,6 +11,10 @@
 */
 class CCharacter3 : public CTransform, public CTask {
 public:
+	//コンストラクター
+	CCharacter3();
+	//デストラクタ
+	~CCharacter3();
 	//モデルの設定
 	//Model(モデルクラスのポインタ)
 	void Model(CModel* m);

@@ -32,7 +32,7 @@ public:
 	void Update();
 private:
 	static CTaskManager mTaskManager;
-	CCharacter3 mCharacter;
+	//CCharacter3 mCharacter;
 	CPlayer mPlayer; //‰Û‘è‚P‚U
 	CModel mBackGround; //”wŒiƒ‚ƒfƒ‹
 	CSound mSoundBgm;
