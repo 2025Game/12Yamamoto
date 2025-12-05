@@ -32,6 +32,8 @@ public:
 	void Update();
 private:
 	static CTaskManager mTaskManager;
+	//C5ƒ‚ƒfƒ‹
+	CModel mModelC5;
 	//CCharacter3 mCharacter;
 	CPlayer mPlayer; //‰Û‘è‚P‚U
 	CModel mBackGround; //”wŒiƒ‚ƒfƒ‹
