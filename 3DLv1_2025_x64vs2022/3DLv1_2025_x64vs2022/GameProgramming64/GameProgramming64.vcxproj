@@ -26,10 +26,10 @@
     <ClCompile Include="CCharacter.cpp" />
     <ClCompile Include="CCharacter3.cpp" />
     <ClCompile Include="CCharacterManager.cpp" />
+    <ClCompile Include="CCollider.cpp" />
     <ClCompile Include="CEnemy.cpp" />
     <ClCompile Include="CEnemy2.cpp" />
     <ClCompile Include="CFont.cpp" />
-    <ClCompile Include="CGame.cpp" />
     <ClCompile Include="CInput.cpp" />
     <ClCompile Include="CMaterial.cpp" />
     <ClCompile Include="CMatrix.cpp" />
@@ -55,10 +55,10 @@
     <ClInclude Include="CCharacter.h" />
     <ClInclude Include="CCharacter3.h" />
     <ClInclude Include="CCharacterManager.h" />
+    <ClInclude Include="CCollider.h" />
     <ClInclude Include="CEnemy.h" />
     <ClInclude Include="CEnemy2.h" />
     <ClInclude Include="CFont.h" />
-    <ClInclude Include="CGame.h" />
     <ClInclude Include="CInput.h" />
     <ClInclude Include="CMaterial.h" />
     <ClInclude Include="CMatrix.h" />
