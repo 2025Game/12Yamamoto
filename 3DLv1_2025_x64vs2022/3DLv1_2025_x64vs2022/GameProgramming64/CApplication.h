@@ -15,7 +15,7 @@
 class CApplication
 {
 public:
-	static CTaskManager* TaskManager();
+	//static CTaskManager* TaskManager();
 	static CTexture* Texture();
 	static CCharacterManager* CharacterManager();
 	enum class EState
@@ -31,7 +31,7 @@ public:
 	//繰り返し実行するプログラム
 	void Update();
 private:
-	static CTaskManager mTaskManager;
+	//static CTaskManager mTaskManager;
 	//C5モデル
 	CModel mModelC5;
 	//CCharacter3 mCharacter;

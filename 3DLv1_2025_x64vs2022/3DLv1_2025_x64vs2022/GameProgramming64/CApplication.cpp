@@ -8,6 +8,7 @@
 #include "CTriangle.h"
 #include "CMatrix.h"
 #include "CTransform.h"
+#include "CCollisionManager.h"
 //敵輸送機モデル
 #define MODEL_C5 "res\\c5.obj", "res\\c5.mtl"
 //背景モデルデータの指定
@@ -29,11 +30,11 @@ CCharacterManager* CApplication::CharacterManager()
 {
 	return &mCharacterManager;
 }
-CTaskManager CApplication::mTaskManager;
-CTaskManager* CApplication::TaskManager()
-{
-	return &mTaskManager;
-}
+//CTaskManager CApplication::mTaskManager;
+//CTaskManager* CApplication::TaskManager()
+//{
+//	return &mTaskManager;
+//}
 void CApplication::Start()
 {
 	//C5モデルの読み込み
@@ -60,7 +61,7 @@ void CApplication::Start()
 
 void CApplication::Update()
 {
-	mTaskManager.Update();
+	CTaskManager::Instance()->Update();
 	//頂点1､頂点2､頂点3,法線データの作成
 	CVector v0, v1, v2, n;
 	//法線を上向きで設定する
@@ -101,7 +102,7 @@ void CApplication::Update()
 	//mCharacter.Update();
 	//mCharacter.Render();
 
-	//mPlayer.Update();
+	//mPlayer.Up-date();
 	//カメラのパラメータを作成する
 	CVector e, c, u;//視点、注視点、上方向
 	//視点を求める
@@ -115,12 +116,12 @@ void CApplication::Update()
 	   //mPlayer.Render();
 	   mBackGround.Render();
 	   //タスクリストの削除
-	   mTaskManager.Delete();
+	   CTaskManager::Instance()->Delete();
 	   //タスクマネージャの描画
-	   mTaskManager.Render();
+	   CTaskManager::Instance()->Render();
 	   //mPlayer.bullet.Update();
 	   //mPlayer.bullet.Render();
-
+	   CCollisionManager::Instance()->Render();
 	/*
 	//描画開始
 	//glBegin(形)
