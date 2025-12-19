@@ -7,6 +7,22 @@
 #include <math.h>
 
 
+//‰Û‘è–¢Š®¬
+CMatrix CMatrix::Transpose() const
+{
+	CMatrix tmp; // •Ô‹p—ps—ñ
+
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			// s‚Æ—ñ‚ğ“ü‚ê‘Ö‚¦‚é
+			tmp.mM[i][j] = mM[j][i];
+		}
+	}
+
+	return tmp;
+}
 
 float* CMatrix::M() const
 {

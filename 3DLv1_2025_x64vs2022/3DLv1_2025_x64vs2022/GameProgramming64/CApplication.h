@@ -15,6 +15,8 @@
 class CApplication
 {
 public:
+	//モデルビュー行列の取得
+	static const CMatrix& ModelViewInverse();
 	//static CTaskManager* TaskManager();
 	static CTexture* Texture();
 	static CCharacterManager* CharacterManager();
@@ -31,6 +33,8 @@ public:
 	//繰り返し実行するプログラム
 	void Update();
 private:
+	//モデルビューの逆行列
+	static CMatrix mModelViewInverse;
 	//static CTaskManager mTaskManager;
 	//C5モデル
 	CModel mModelC5;
