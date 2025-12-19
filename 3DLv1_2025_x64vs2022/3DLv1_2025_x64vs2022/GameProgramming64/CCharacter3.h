@@ -5,12 +5,16 @@
 #include "CTransform.h"
 //モデルクラスのインクルード
 #include "CModel.h"
+class CCollider;
+
 /*
 キャラクタークラス
 ゲームキャラクタの基本的な機能を定義する
 */
 class CCharacter3 : public CTransform, public CTask {
 public:
+	//衝突処理
+	virtual void Collision(CCollider* m, CCollider* o) {}
 	//コンストラクター
 	CCharacter3();
 	//デストラクタ

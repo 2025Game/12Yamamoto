@@ -7,6 +7,9 @@
 エネミークラス
 キャラクタクラスを継承
 */
+
+	
+
 class CEnemy : public CCharacter3 {
 public:
 	//確認用メソッド　削除予定
@@ -22,6 +25,9 @@ public:
 		const CVector& rotation, const CVector& scale);
 	//更新処理
 private:
+	// 衝突処理
+		//Collision(コライダ1, コライダ2)
+		void Collision(CCollider * m, CCollider * o);
 	//コライダ
 	CCollider mCollider1;
 	CCollider mCollider2;
