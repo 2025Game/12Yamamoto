@@ -4,7 +4,7 @@
 /*
 ビルボードクラス
 常にカメラの方を向く四角形
-ya
+
 */
 class CBillBoard : public CCharacter3 {
 public:
