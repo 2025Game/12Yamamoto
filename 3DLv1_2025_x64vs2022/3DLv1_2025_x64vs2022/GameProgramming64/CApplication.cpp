@@ -42,6 +42,17 @@ CCharacterManager* CApplication::CharacterManager()
 //}
 void CApplication::Start()
 {
+	//三角コライダの確認
+	mColliderTriangle.Set(nullptr, nullptr
+		, CVector(-50.0f, 0.0f, -50.0f)
+		, CVector(-50.0f, 0.0f, 50.0f)
+		, CVector(50.0f, 0.0f, -50.0f));
+	//三角コライダの確認2
+	mColliderTriangle2.Set(nullptr, nullptr
+		, CVector(50.0f, 0.0f, 50.0f)
+		, CVector(50.0f, 0.0f, -50.0f)
+		, CVector(-50.0f, 0.0f, 50.0f));
+
 	//C5モデルの読み込み
 	mModelC5.Load(MODEL_C5);
 	//敵機のインスタンス作成
