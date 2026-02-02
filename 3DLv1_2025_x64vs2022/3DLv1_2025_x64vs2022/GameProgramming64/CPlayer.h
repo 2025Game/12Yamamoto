@@ -17,6 +17,8 @@
 class CPlayer : public CCharacter3
 {
 public:
+	//Õ“Ëˆ—
+	void Collision(CCollider* m, CCollider* o);
 	//CBullet bullet;
 	CPlayer() 
 		: mLine(this, &mMatrix, CVector(0.0f, 0.0f, -14.0f), CVector(0.0f, 0.0f, 17.0f))
