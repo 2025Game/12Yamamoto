@@ -56,8 +56,10 @@ void CModel::CreateVertexBuffer()
 		}
 	}
 }
-
-
+const std::vector<CTriangle>& CModel::Triangles() const
+{
+	return mTriangles;
+}
 //•`‰æ
 //Render(s—ñ)
 void CModel::Render(const CMatrix& m)
