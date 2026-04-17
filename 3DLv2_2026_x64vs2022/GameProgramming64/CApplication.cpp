@@ -8,6 +8,7 @@
 #include "CTransform.h"
 #include "CCollisionManager.h"
 #include "CBillBoard.h"
+#include "CEnemy3.h"
 
 CUi* CApplication::spUi = nullptr;
 
@@ -59,6 +60,9 @@ CCharacterManager* CApplication::CharacterManager()
 
 void CApplication::Start()
 {
+	new CEnemy3(CVector(-5.0f, 1.0f, -10.0f), CVector(), CVector(0.1f, 0.1f, 0.1f));
+	new CEnemy3(CVector(5.0f, 1.0f, -10.0f), CVector(), CVector(0.1f, 0.1f, 0.1f));
+
 	spUi = new CUi();	//UIÉNÉâÉXÇÃê∂ê¨
 
 	CMatrix matrix;
