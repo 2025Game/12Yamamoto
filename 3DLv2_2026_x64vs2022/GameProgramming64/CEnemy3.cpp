@@ -35,6 +35,7 @@ CEnemy3::CEnemy3(const CVector& position
 //XVˆ—
 void CEnemy3::Update()
 {
+
 }
 
 //Õ“Ëˆ—
