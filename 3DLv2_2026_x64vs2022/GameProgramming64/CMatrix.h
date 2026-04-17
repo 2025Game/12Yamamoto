@@ -7,9 +7,9 @@
 class CVector;
 class CMatrix {
 public:
-	CVector VectorZ() const; //Z軸ベクトルの取得
-	CVector VectorX() const; //X軸ベクトルの取得
-	CVector VectorY() const; //Y軸ベクトルの取得
+	CVector VectorZ() const;
+	CVector VectorX() const;
+	CVector VectorY() const;
 	//逆行列を求める
 	CMatrix Inverse() const;
 
@@ -31,9 +31,7 @@ public:
 	//要素数の取得
 	int Size();
 
-	CVector VectorZ() const; //Z軸ベクトルの取得
-	CVector VectorX() const; //X軸ベクトルの取得
-	CVector VectorY() const; //Y軸ベクトルの取得
+
 
 	//逆行列取得
 	CMatrix Transpose() const;
