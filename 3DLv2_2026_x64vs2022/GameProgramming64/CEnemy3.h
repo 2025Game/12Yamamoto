@@ -1,5 +1,6 @@
 #ifndef CENEMY3_H
 #define CENEMY3_H
+#define HP 3	//耐久値
 //キャラクタクラスのインクルード
 #include "CCharacter3.h"
 //コライダクラスのインクルード
@@ -22,6 +23,7 @@ public:
 	void Collision(CCollider* m, CCollider* o);
 	void Collision();
 private:
+	int mHp;	//ヒットポイント
 	//モデルデータ
 	static CModel sModel;
 	//コライダ

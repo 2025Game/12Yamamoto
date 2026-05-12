@@ -16,6 +16,18 @@
     <Filter Include="ソース ファイル\Lib">
       <UniqueIdentifier>{275eb950-ff6a-4535-ac0c-c052fcd2fa52}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\BaseSystem">
+      <UniqueIdentifier>{cda4a105-1adb-46da-9e69-230cef3516e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\BaseSystem\Scene">
+      <UniqueIdentifier>{0f642dca-6f42-48fd-85e7-515b9ee8e2ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Game">
+      <UniqueIdentifier>{33189923-5dcc-42b5-8585-63ec7e4097ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Game\Scene">
+      <UniqueIdentifier>{649382aa-03b9-4bbf-b5a0-fb7127b148df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CApplication.cpp">
@@ -116,6 +128,15 @@
     </ClCompile>
     <ClCompile Include="CColliderMesh.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneBase.cpp">
+      <Filter>ソース ファイル\BaseSystem\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CTitleScene.cpp">
+      <Filter>ソース ファイル\Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CApplication3.cpp">
+      <Filter>ソース ファイル\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +244,18 @@
     </ClInclude>
     <ClInclude Include="CColliderMesh.h">
       <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="EScene.h">
+      <Filter>ソース ファイル\BaseSystem\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CSceneBase.h">
+      <Filter>ソース ファイル\BaseSystem\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CTitleScene.h">
+      <Filter>ソース ファイル\Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CApplication3.h">
+      <Filter>ソース ファイル\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

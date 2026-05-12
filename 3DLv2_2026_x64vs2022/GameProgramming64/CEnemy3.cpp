@@ -69,8 +69,7 @@ void CEnemy3::Update()
 			}
 		}
 	}
-
-
+	
 }
 
 //衝突処理
@@ -82,6 +81,8 @@ void CEnemy3::Collision(CCollider* m, CCollider* o)
 	case CCollider::EType::ESPHERE: //球コライダの時
 		//コライダのmとyが衝突しているか判定
 		if (CCollider::Collision(m, o)) {
+				mHp--;	//ヒットポイントの減算
+
 			//エフェクト生成
 			new CEffect(o->Parent()->Position(), 1.0f, 1.0f, "exp.tga", 4, 4, 2);
 			//衝突している時は無効にする
@@ -95,7 +96,6 @@ void CEnemy3::Collision(CCollider* m, CCollider* o)
 		{	//衝突しない位置まで戻す
 			mPosition = mPosition + adjust;
 		}
-		break;
 	}
 
 }
