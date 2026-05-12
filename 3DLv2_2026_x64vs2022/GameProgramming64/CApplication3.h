@@ -2,6 +2,7 @@
 #define CAPPLICATION3_H
 #include "CTitleScene.h"
 #include <memory> //std::shared_ptr
+
 class CApplication3
 {
 public:
