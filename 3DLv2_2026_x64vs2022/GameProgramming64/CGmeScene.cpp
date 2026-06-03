@@ -3,6 +3,7 @@
 #include "CGmeScene.h"
 #include "CCharacter3.h"
 #include"CXCharacter.h"
+#include "CXPlayer.h"
 #define MODEL_BACKGROUND "res\\sky.obj", "res\\sky.mtl"
 CGameScene::CGameScene()
 	: CSceneBase(EScene::eGame)
@@ -10,17 +11,23 @@ CGameScene::CGameScene()
 }
 void CGameScene::Load()
 {
-	//課題 背景モデルデータの読み込み
-	    mBackGround.Load(MODEL_BACKGROUND);
-	//キャラクタのインスタンス作成
-	CCharacter3* character = new CCharacter3();
-	//キャラクタのモデルの設定
-	character->Model(&mBackGround);
-	mPlayer.Load(MODEL_FILE);
-	 //X	キャラ
-	 CXCharacter* xchar = new CXCharacter();
-	 //設定
-	 xchar->Init(&mPlayer);
+    //課題 背景モデルデータの読み込み
+    mBackGround.Load(MODEL_BACKGROUND);
+
+    //キャラクタのインスタンス作成
+    CCharacter3* character = new CCharacter3();
+
+    //キャラクタのモデルの設定
+    character->Model(&mBackGround);
+    mPlayer.Load(MODEL_FILE);
+	//X プレイヤー
+	CXPlayer* player = new CXPlayer();
+
+	//設定
+	player->Init(&mPlayer);
+
+	//位置
+	player->Position(CVector(1.0f, 0.0f, 0.0f));
 }
 void CGameScene::Update()
 {

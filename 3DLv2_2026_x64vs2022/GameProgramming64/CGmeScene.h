@@ -4,6 +4,7 @@
 #include "CSceneBase.h"
 #include "CModel.h"
 #include "CModelX.h"
+#include "CXPlayer.h"
 
 //ゲームシーン
 class CGameScene : public CSceneBase
@@ -19,7 +20,9 @@ public:
 
 private:
     CModel  mBackGround; //背景モデル
-    CModelX mPlayer;     //Xモデル
+    CModelX mPlayer;//Xモデル
+  
+
 };
 
 #endif
