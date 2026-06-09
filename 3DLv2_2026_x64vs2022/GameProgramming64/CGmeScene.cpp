@@ -4,6 +4,8 @@
 #include "CCharacter3.h"
 #include"CXCharacter.h"
 #include "CXPlayer.h"
+#include "CColliderMesh.h"
+#include "CCollisionManager.h"
 #define MODEL_BACKGROUND "res\\sky.obj", "res\\sky.mtl"
 CGameScene::CGameScene()
 	: CSceneBase(EScene::eGame)
@@ -28,6 +30,8 @@ void CGameScene::Load()
 
 	//位置
 	player->Position(CVector(1.0f, 0.0f, 0.0f));
+	//メッシュコライダの設定
+	mColliderMesh.Set(nullptr, nullptr, &mBackGround);
 }
 void CGameScene::Update()
 {
@@ -37,6 +41,10 @@ void CGameScene::Update()
 		0.0f, 1.0f, 0.0f);
 	//全キャラクタの更新
 	CTaskManager::Instance()->Update();
+	//衝突処理の呼び出し
+	CTaskManager::Instance()->Collision();
 	//課題 全キャラクタの描画
 	CTaskManager::Instance()->Render();
+	//コライダの描画
+	CCollisionManager::Instance()->Render();
 }
