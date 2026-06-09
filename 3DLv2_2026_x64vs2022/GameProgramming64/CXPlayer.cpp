@@ -4,18 +4,26 @@
 #define GRAVITY 0.0625f 
 
 CXPlayer::CXPlayer()
+    : mColliderLine(this, &mMatrix,
+        CVector(0.0f, 3.5f, 0.0f),
+        CVector(0.0f, 0.0f, 0.0f))
+
 {
-    mColliderLine.Set(
-        this,
-        &mMatrix,
-        CVector(0.0f, 0.0f, 0.0f),
-        CVector(0.0f, 3.5f, 0.0f)
-    );
+    //待機状態の作成
+    mpIdle = std::make_unique<CPlayerIdle>();
+    //最初は待機状態
+    //get()ｈa、unique_ptrが保持しているポインタを取得する関数
+    mpState = mpIdle.get();
+    mpState->Start(this);
+    mState = mpState->State();
 }
 
 // 重力
 void CXPlayer::Update()
+
 {
+    //状態?更新
+    mpState->Update();
     // GRAVITYの大きさだけ、下方向へ移動させる
     CVector gravity(0.0f, -GRAVITY, 0.0f);
     Position(Position() + gravity);

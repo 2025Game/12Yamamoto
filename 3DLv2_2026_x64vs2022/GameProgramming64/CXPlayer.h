@@ -3,6 +3,7 @@
 
 #include "CXCharacter.h"
 #include "CColliderLine.h"
+#include "CPlayerIdle.h"
 
 class CXPlayer : public CXCharacter
 {
@@ -17,7 +18,9 @@ public:
     void Collision();
 private:
     CColliderLine mColliderLine;
-   
+    EState mState; //ó‘Ô?•Û
+    CState* mpState; //ó‘Ôˆ—
+    std::unique_ptr<CPlayerIdle> mpIdle; //‘Ò‹@ó‘Ô
 };
 
 #endif

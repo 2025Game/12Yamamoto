@@ -43,6 +43,9 @@
     <Filter Include="ソース ファイル\BaseSystem\Collider">
       <UniqueIdentifier>{8966baeb-8283-4ed5-869f-f4417920ceae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Game\Character\Player">
+      <UniqueIdentifier>{6e8e6bcc-d328-4443-a330-0d64a3680457}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CApplication.cpp">
@@ -168,9 +171,6 @@
     <ClCompile Include="CXCharacter.cpp">
       <Filter>ソース ファイル\BaseSystem\Object</Filter>
     </ClCompile>
-    <ClCompile Include="CXPlayer.cpp">
-      <Filter>ソース ファイル\Game\Character</Filter>
-    </ClCompile>
     <ClCompile Include="CCollider.cpp">
       <Filter>ソース ファイル\BaseSystem\Collider</Filter>
     </ClCompile>
@@ -185,6 +185,12 @@
     </ClCompile>
     <ClCompile Include="CColliderTriangle.cpp">
       <Filter>ソース ファイル\BaseSystem\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerldle.cpp">
+      <Filter>ソース ファイル\Game\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CXPlayer.cpp">
+      <Filter>ソース ファイル\Game\Character\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -320,9 +326,6 @@
     <ClInclude Include="CXCharacter.h">
       <Filter>ソース ファイル\BaseSystem\Object</Filter>
     </ClInclude>
-    <ClInclude Include="CXPlayer.h">
-      <Filter>ソース ファイル\Game\Character</Filter>
-    </ClInclude>
     <ClInclude Include="CCollider.h">
       <Filter>ソース ファイル\BaseSystem\Collider</Filter>
     </ClInclude>
@@ -337,6 +340,15 @@
     </ClInclude>
     <ClInclude Include="CCollisionManager.h">
       <Filter>ソース ファイル\BaseSystem\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerIdle.h">
+      <Filter>ソース ファイル\Game\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CState.h">
+      <Filter>ソース ファイル\Game\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="CXPlayer.h">
+      <Filter>ソース ファイル\Game\Character\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
