@@ -4,6 +4,7 @@
 #include "CXCharacter.h"
 #include "CColliderLine.h"
 #include "CPlayerIdle.h"
+#include "CplayerWalk.h"
 
 class CXPlayer : public CXCharacter
 {
@@ -17,8 +18,9 @@ public:
     //Õ“Ëˆ—
     void Collision();
 private:
+    std::unique_ptr<CPlayerWalk> mpWalk; //•à?ó‘Ô
     CColliderLine mColliderLine;
-    EState mState; //ó‘Ô?•Û
+    EState mState; //ó‘Ô•Û
     CState* mpState; //ó‘Ôˆ—
     std::unique_ptr<CPlayerIdle> mpIdle; //‘Ò‹@ó‘Ô
 };

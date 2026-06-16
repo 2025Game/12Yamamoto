@@ -1,5 +1,6 @@
 #include "CPlayerIdle.h"
 #include "CXCharacter.h"
+#include "CXPlayer.h"
 //‰ñ“]‘¬“x
 #define ROTATIONSPEED 2.0f
 void CPlayerIdle::Start(CXCharacter* parent)
@@ -12,17 +13,11 @@ void CPlayerIdle::Start(CXCharacter* parent)
 }
 void CPlayerIdle::Update()
 {
-    if (mInput.Key('A'))
+  
+   // WƒL[‚ª‰Ÿ‚³‚ê‚½‚ç•à‚«ó‘Ô
+    if (mInput.Key('W'))
     {
-        CVector r = mpParent->Rotation() +
-            CVector(0.0f, ROTATIONSPEED, 0.0f);
-        mpParent->Rotation(r);
-    }
-
-    if (mInput.Key('D'))
-    {
-        CVector r = mpParent->Rotation() +
-            CVector(0.0f, -ROTATIONSPEED, 0.0f);
-        mpParent->Rotation(r);
+        mState = EState::EWALK;
     }
 }
+

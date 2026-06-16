@@ -192,6 +192,9 @@
     <ClCompile Include="CXPlayer.cpp">
       <Filter>ソース ファイル\Game\Character\Player</Filter>
     </ClCompile>
+    <ClCompile Include="CPlayerWalk.cpp">
+      <Filter>ソース ファイル\Game\Character\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CApplication.h">
@@ -348,6 +351,9 @@
       <Filter>ソース ファイル\Game\Character</Filter>
     </ClInclude>
     <ClInclude Include="CXPlayer.h">
+      <Filter>ソース ファイル\Game\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CplayerWalk.h">
       <Filter>ソース ファイル\Game\Character\Player</Filter>
     </ClInclude>
   </ItemGroup>
