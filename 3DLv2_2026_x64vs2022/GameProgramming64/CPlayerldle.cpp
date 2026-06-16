@@ -19,5 +19,11 @@ void CPlayerIdle::Update()
     {
         mState = EState::EWALK;
     }
+    // IƒL[‚ª‰Ÿ‚³‚ê‚½‚çUŒ‚ó‘Ô
+    if (mInput.Key('I'))
+    {
+        mState = EState::EATTACK;
+    }
+
 }
 

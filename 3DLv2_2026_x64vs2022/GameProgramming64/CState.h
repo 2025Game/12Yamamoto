@@ -7,6 +7,7 @@ enum class EState
 	ENONE, //状態?し
 	EIDLE, //待機
 	EWALK, //歩き
+	EATTACK,   //攻撃
 };
 class CState
 {
@@ -24,4 +25,5 @@ public:
 protected:
 	EState mState; //状態?種類
 	CXCharacter* mpParent; //親?ポインタ
+	
 }; 

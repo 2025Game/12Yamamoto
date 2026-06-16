@@ -6,9 +6,9 @@
 
 void CPlayerWalk::Start(CXCharacter* parent)
 {
-	//親?ポインタを保存
+	//親のポインタを保存
 	mpParent = parent;
-	//アニメーション?変更
+	//アニメーションの変更
 	mpParent->ChangeAnimation(1, true, 60);
 	mState = EState::EWALK; //状態の種類を歩くにする
 }
@@ -48,5 +48,11 @@ void CPlayerWalk::Update()
 
 			mpParent->Rotation(r);
 		}
+		// Iキーが押されたら攻撃状態
+		if (mInput.Key('I'))
+		{
+			mState = EState::EATTACK;
+		}
+
 }
 	
