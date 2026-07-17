@@ -20,12 +20,15 @@ CXPlayer::CXPlayer()
     mpWalk = std::make_unique<CPlayerWalk>();
     //攻撃状態の作成
     mpAttack = std::make_unique<CPlayerAttack>();
+    //ジャンプ状態生成
+    mpJump = std::make_unique<CPlayerJump>();
 }
 
 // 重力
 void CXPlayer::Update()
 
 {
+   
     //状態の更新
     mpState->Update();
     //状態の切り替え
@@ -42,6 +45,9 @@ void CXPlayer::Update()
         case EState::EATTACK:
             mpState = mpAttack.get();
             break;
+        case EState::EJUMP:
+            mpState = mpJump.get();
+            break;
         default:
             break;
         }
@@ -57,6 +63,8 @@ void CXPlayer::Update()
 
 void CXPlayer::Collision(CCollider* m, CCollider* o)
 {
+    //状態クラスの衝突処理
+    mpState->Collision(m, o);
     //自身のコライダタイプの判定
     switch (m->Type()) {
     case CCollider::EType::ELINE://線分コライダ

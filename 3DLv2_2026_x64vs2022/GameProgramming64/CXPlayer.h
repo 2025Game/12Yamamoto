@@ -6,6 +6,7 @@
 #include "CPlayerIdle.h"
 #include "CplayerWalk.h"
 #include "CPlayerAttack.h"
+#include "CPlayerJump.h"
 class CXPlayer : public CXCharacter
 {
 public:
@@ -19,6 +20,7 @@ public:
     void Collision();
 private:
 private:
+    std::unique_ptr<CPlayerJump> mpJump; //ƒWƒƒƒ“ƒvó‘Ô
     std::unique_ptr<CPlayerWalk> mpWalk; //•à‚«ó‘Ô
     std::unique_ptr<CPlayerIdle> mpIdle; //‘Ò‹@ó‘Ô
     std::unique_ptr<CPlayerAttack> mpAttack; //UŒ‚ó‘Ô

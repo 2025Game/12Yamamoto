@@ -7,7 +7,8 @@ enum class EState
 	ENONE, //状態?し
 	EIDLE, //待機
 	EWALK, //歩き
-	EATTACK,   //攻撃
+	EATTACK, //攻撃
+	EJUMP, //ジャンプ
 };
 class CState
 {
@@ -20,8 +21,8 @@ public:
 	//衝突処理
 	//Collision(コライダ1, コライダ2)
 	virtual void Collision(CCollider* m, CCollider* o) {};
-	//状態?取得
-	EState State() { return mState; }
+	//状態取得
+	EState State() const { return mState; }
 protected:
 	EState mState; //状態?種類
 	CXCharacter* mpParent; //親?ポインタ

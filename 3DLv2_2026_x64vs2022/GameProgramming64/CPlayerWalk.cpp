@@ -53,6 +53,10 @@ void CPlayerWalk::Update()
 		{
 			mState = EState::EATTACK;
 		}
-
+		//スペースが押されたらジャンプ
+		if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+		{
+			mState = EState::EJUMP;
+		}
 }
 	

@@ -24,6 +24,9 @@ void CPlayerIdle::Update()
     {
         mState = EState::EATTACK;
     }
-
+    if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+    {
+        mState = EState::EJUMP;
+    }
 }
 
