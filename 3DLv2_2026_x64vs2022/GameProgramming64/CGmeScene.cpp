@@ -6,6 +6,7 @@
 #include "CXPlayer.h"
 #include "CColliderMesh.h"
 #include "CCollisionManager.h"
+#include "CCube.h"
 #define MODEL_BACKGROUND "res\\sky.obj", "res\\sky.mtl"
 CGameScene::CGameScene()
 	: CSceneBase(EScene::eGame)
@@ -32,6 +33,10 @@ void CGameScene::Load()
 	player->Position(CVector(1.0f, 0.0f, 0.0f));
 	//メッシュコライダの設定
 	mColliderMesh.Set(nullptr, nullptr, &mBackGround);
+
+	CCharacter3* cube = new CCube();
+	cube->Position(CVector(0.0f, 0.0f, -9.0f));
+	cube->Scale(CVector(10.0f, 0.5f, 10.0f));
 }
 void CGameScene::Update()
 {
