@@ -1,5 +1,14 @@
 #include "CTransform.h"
 
+CTransform::CTransform()
+{
+	mpParent = nullptr;
+}
+const CMatrix& CTransform::CombinedMatrix() const
+{
+	return mCombinedMatrix;
+}
+
 const CVector& CTransform::Position() const
 {
 	return mPosition;
@@ -56,4 +65,16 @@ void CTransform::Update() {
 	mMatrixTranslate.Translate(mPosition.X(), mPosition.Y(), mPosition.Z());
 	//合成行列の設定
 	mMatrix = mMatrixScale * mMatrixRotate * mMatrixTranslate;
+
+	//合成行列の設定
+//子に引き継ぐ合成行列は回転と移動のみ
+	mCombinedMatrix = mMatrixRotate * mMatrixTranslate;
+	//親がいる場合は、親の合成行列を掛ける
+	if (mpParent) {
+		mCombinedMatrix = mCombinedMatrix *
+			mpParent->mCombinedMatrix;
+
+	}
+	//自分が使用する合成行列には、拡大縮小行列を掛ける
+	mMatrix = mMatrixScale * mCombinedMatrix;
 }
