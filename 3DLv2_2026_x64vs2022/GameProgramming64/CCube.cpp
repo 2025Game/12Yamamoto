@@ -21,17 +21,18 @@ CCube::CCube()
     mCollider[0].Set(
         this,
         &mMatrix,
-        CVector(-0.5f, 0.5f, -0.5f),
-        CVector(0.5f, 0.5f, -0.5f),
-        CVector(0.5f, 0.5f, 0.5f)
+        CVector(1.0f, 2.0f, 1.0f),
+        CVector(1.0f, 2.0f, -1.0f),
+        CVector(-1.0f, 2.0f, -1.0f)
+
     );
 
     mCollider[1].Set(
         this,
         &mMatrix,
-        CVector(-0.5f, 0.5f, -0.5f),
-        CVector(0.5f, 0.5f, 0.5f),
-        CVector(-0.5f, 0.5f, 0.5f)
+        CVector(-1.0f, 2.0f, 1.0f),
+        CVector(1.0f, 2.0f, 1.0f),
+        CVector(-1.0f, 2.0f, -1.0f)
     );
 }
 
