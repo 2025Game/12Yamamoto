@@ -96,16 +96,10 @@
     <ClCompile Include="CUi.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="CCamera.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="CVector.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="CMatrix.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="CTransform.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="CBillBoard.cpp">
@@ -189,9 +183,6 @@
     <ClCompile Include="CPlayerldle.cpp">
       <Filter>ソース ファイル\Game\Character\Player</Filter>
     </ClCompile>
-    <ClCompile Include="CXPlayer.cpp">
-      <Filter>ソース ファイル\Game\Character\Player</Filter>
-    </ClCompile>
     <ClCompile Include="CPlayerWalk.cpp">
       <Filter>ソース ファイル\Game\Character\Player</Filter>
     </ClCompile>
@@ -203,6 +194,15 @@
     </ClCompile>
     <ClCompile Include="CCube.cpp">
       <Filter>ソース ファイル\Game\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="CXPlayer.cpp">
+      <Filter>ソース ファイル\BaseSystem\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CCamera.cpp">
+      <Filter>ソース ファイル\BaseSystem\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CTransform.cpp">
+      <Filter>ソース ファイル\BaseSystem\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -254,13 +254,7 @@
     <ClInclude Include="CUi.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="CCamera.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="CVector.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="CTransform.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="CBillBoard.h">
@@ -373,6 +367,12 @@
     </ClInclude>
     <ClInclude Include="CCube.h">
       <Filter>ソース ファイル\Game\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="CCamera.h">
+      <Filter>ソース ファイル\BaseSystem\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CTransform.h">
+      <Filter>ソース ファイル\BaseSystem\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

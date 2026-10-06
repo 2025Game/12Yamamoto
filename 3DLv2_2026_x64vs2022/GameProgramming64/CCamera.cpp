@@ -1,6 +1,21 @@
 #include "CCamera.h"
 #include "glut.h"
 
+
+
+CCamera* CCamera::Instance()
+{
+	if (spInstance == nullptr)
+	{
+		spInstance = new CCamera();
+	}
+	return spInstance;
+}
+
+void CCamera::Update()
+{
+}
+
 void CCamera::Start(double left, double right
 	, double bottom, double top)
 {
@@ -36,3 +51,4 @@ void CCamera::End()
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
 }
+

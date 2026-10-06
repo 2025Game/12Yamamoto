@@ -7,6 +7,7 @@
 */
 class CTransform {
 public:
+	
 	CTransform();
 	const CMatrix& CombinedMatrix() const;
 	//ˆÊ’u‚ÌŽæ“¾

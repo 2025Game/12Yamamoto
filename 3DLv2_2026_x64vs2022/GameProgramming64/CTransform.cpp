@@ -1,5 +1,6 @@
 #include "CTransform.h"
 
+
 CTransform::CTransform()
 {
 	mpParent = nullptr;
