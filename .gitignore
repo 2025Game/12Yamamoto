@@ -416,3 +416,9 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+3DLV3/Project/Rain/.vsconfig
+*.csproj
+/3DLV3/Project/Rain/Library
+*.sln
+/3DLV3/Project/Rain/UserSettings
+/3DLV3/Project/Rain/Temp
