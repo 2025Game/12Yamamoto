@@ -422,3 +422,13 @@ FodyWeavers.xsd
 *.sln
 /3DLV3/Project/Rain/UserSettings
 /3DLV3/Project/Rain/Temp
+3DLV3/Project/Rain/Assets/Mame2an/Font/NotoSansJP/NotoSansJP-Black SDF.asset
+3DLV3/Project/Rain/Assets/Mame2an/Font/NotoSansJP/NotoSansJP-Bold SDF.asset
+3DLV3/Project/Rain/Assets/Mame2an/Font/NotoSansJP/NotoSansJP-ExtraBold SDF.asset
+3DLV3/Project/Rain/Assets/Mame2an/Font/NotoSansJP/NotoSansJP-ExtraLight SDF.asset
+3DLV3/Project/Rain/Assets/Mame2an/Font/NotoSansJP/NotoSansJP-Light SDF.asset
+3DLV3/Project/Rain/Assets/Mame2an/Font/NotoSansJP/NotoSansJP-Medium SDF.asset
+3DLV3/Project/Rain/Assets/Mame2an/Font/NotoSansJP/NotoSansJP-Regular SDF.asset
+3DLV3/Project/Rain/Assets/Mame2an/Font/NotoSansJP/NotoSansJP-SemiBold SDF.asset
+3DLV3/Project/Rain/Assets/Mame2an/Font/NotoSansJP/NotoSansJP-Thin SDF.asset
+3DLV3/Project/Rain/Assets/Mame2an/Font/NotoSansJP/NotoSansJP-VariableFont_wght SDF.asset
