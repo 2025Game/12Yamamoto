@@ -8,15 +8,21 @@ public class RaindropConnector : MonoBehaviour
     [SerializeField] private Material lineMaterial;
     [SerializeField] private float lineWidth = 0.05f;
 
-    [Header("田の形を判定する雨粒")]
-    [Tooltip("0:左上 1:上中央 2:右上 3:右中央 4:右下 5:下中央 6:左下 7:左中央 8:中央")]
+    [Header("採点用の雨粒")]
     [SerializeField] private GameObject[] shapeRaindrops = new GameObject[9];
 
-    [Header("採点設定")]
-    [SerializeField] private TMP_Text resultText;
-    [SerializeField] private float positionTolerance = 0.5f;
+    [Header("口のCollider判定")]
+    [SerializeField] private Collider topArea;
+    [SerializeField] private Collider rightArea;
+    [SerializeField] private Collider bottomArea;
+    [SerializeField] private Collider leftArea;
 
-    // 接続した線を記録するクラス
+    [Header("判定精度")]
+    [SerializeField] private int samplesPerLine = 30;
+
+    [Header("採点結果")]
+    [SerializeField] private TMP_Text resultText;
+
     private class Connection
     {
         public GameObject start;
@@ -24,40 +30,28 @@ public class RaindropConnector : MonoBehaviour
         public LineRenderer line;
     }
 
-    // 接続一覧
     private List<Connection> connections = new List<Connection>();
 
-    // 田を作るために必要な接続
+    // 田に必要な接続
     private int[,] requiredConnections =
     {
-        { 0, 1 },
-        { 1, 2 },
-        { 2, 3 },
-        { 3, 4 },
-        { 4, 5 },
-        { 5, 6 },
-        { 6, 7 },
-        { 7, 0 },
-        { 1, 8 },
-        { 8, 5 },
-        { 7, 8 },
-        { 8, 3 }
+        { 0, 1 }, { 1, 2 },
+        { 2, 3 }, { 3, 4 },
+        { 4, 5 }, { 5, 6 },
+        { 6, 7 }, { 7, 0 },
+        { 1, 8 }, { 8, 5 },
+        { 7, 8 }, { 8, 3 }
     };
 
-
     // =====================================
-    // 雨粒同士を接続する
+    // 雨粒同士を接続
     // =====================================
 
     public void ConnectRaindrops(GameObject start, GameObject end)
     {
-        if (start == null || end == null)
+        if (start == null || end == null || start == end)
             return;
 
-        if (start == end)
-            return;
-
-        // すでに接続されているか確認
         foreach (Connection connection in connections)
         {
             if (
@@ -69,12 +63,13 @@ public class RaindropConnector : MonoBehaviour
             }
         }
 
-        // 線を作成
         GameObject lineObject = new GameObject("ConnectionLine");
 
         LineRenderer line = lineObject.AddComponent<LineRenderer>();
 
+        line.useWorldSpace = true;
         line.positionCount = 2;
+
         line.SetPosition(0, start.transform.position);
         line.SetPosition(1, end.transform.position);
 
@@ -82,11 +77,8 @@ public class RaindropConnector : MonoBehaviour
         line.endWidth = lineWidth;
 
         if (lineMaterial != null)
-        {
             line.material = lineMaterial;
-        }
 
-        // 接続情報を保存
         Connection newConnection = new Connection();
 
         newConnection.start = start;
@@ -98,135 +90,163 @@ public class RaindropConnector : MonoBehaviour
         Debug.Log("雨粒を接続しました！");
     }
 
-
     // =====================================
     // 採点
     // =====================================
 
     public void CalculateScore()
     {
-        // 雨粒が9個設定されているか確認
-        if (shapeRaindrops == null || shapeRaindrops.Length < 9)
+        GameManager gameManager = FindObjectOfType<GameManager>();
+
+        int currentStage = 1;
+
+        if (gameManager != null)
+            currentStage = gameManager.GetCurrentStage();
+
+        if (currentStage == 1)
         {
-            Debug.LogError("Shape Raindropsに9個の雨粒を設定してください。");
+            CalculateMouthScore();
+        }
+        else
+        {
+            CalculateOldScore();
+        }
+    }
+
+    // =====================================
+    // 口のCollider採点
+    // =====================================
+
+    private void CalculateMouthScore()
+    {
+        if (topArea == null ||
+            rightArea == null ||
+            bottomArea == null ||
+            leftArea == null)
+        {
+            Debug.LogError("口のColliderが設定されていません！");
+            ShowResult("Colliderが設定されていません！");
             return;
         }
 
-        // 雨粒がすべて設定されているか確認
+        int score = 0;
+
+        bool topPassed = CheckArea(topArea);
+        bool rightPassed = CheckArea(rightArea);
+        bool bottomPassed = CheckArea(bottomArea);
+        bool leftPassed = CheckArea(leftArea);
+
+        if (topPassed) score += 25;
+        if (rightPassed) score += 25;
+        if (bottomPassed) score += 25;
+        if (leftPassed) score += 25;
+
+        string result =
+            "SCORE : " + score + " / 100\n\n" +
+            "上側 : " + (topPassed ? "OK" : "未通過") + "\n" +
+            "右側 : " + (rightPassed ? "OK" : "未通過") + "\n" +
+            "下側 : " + (bottomPassed ? "OK" : "未通過") + "\n" +
+            "左側 : " + (leftPassed ? "OK" : "未通過");
+
+        ShowResult(result);
+
+        Debug.Log(result);
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        if (gameManager != null)
+            gameManager.ShowNextStageButton();
+    }
+
+    // =====================================
+    // Colliderを線が通過したか調べる
+    // =====================================
+
+    private bool CheckArea(Collider targetArea)
+    {
+        foreach (Connection connection in connections)
+        {
+            if (connection.line == null)
+                continue;
+
+            LineRenderer line = connection.line;
+
+            for (int i = 0; i < line.positionCount - 1; i++)
+            {
+                Vector3 start = line.GetPosition(i);
+                Vector3 end = line.GetPosition(i + 1);
+
+                for (int j = 0; j <= samplesPerLine; j++)
+                {
+                    float t = j / (float)samplesPerLine;
+
+                    Vector3 point = Vector3.Lerp(start, end, t);
+
+                    if (targetArea.bounds.Contains(point))
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    // =====================================
+    // 以前の採点（ステージ2以降）
+    // =====================================
+
+    private void CalculateOldScore()
+    {
         for (int i = 0; i < 9; i++)
         {
             if (shapeRaindrops[i] == null)
             {
-                Debug.LogError("Shape Raindropsの " + i + " 番目が未設定です。");
+                Debug.LogError(
+                    "Shape Raindropsの " + i + " 番目が未設定です。"
+                );
                 return;
             }
         }
 
-        // 各項目の点数を計算
-        int shapeScore = CalculateShapeScore();
-        int connectionScore = CalculateConnectionScore();
-        int balanceScore = CalculateBalanceScore();
+        int shapeScore = CalculateOldShapeScore();
+        int connectionScore = CalculateOldConnectionScore();
+        int balanceScore = CalculateOldBalanceScore();
 
-        // 合計点
         int totalScore = shapeScore + connectionScore + balanceScore;
 
-        // ランク
-        string rank = GetRank(totalScore);
-
-        // 結果表示
         string result =
             "SCORE : " + totalScore + " / 100\n\n" +
             "形の一致度 : " + shapeScore + " / 50\n" +
             "接続の正確さ : " + connectionScore + " / 30\n" +
             "バランス : " + balanceScore + " / 20\n\n" +
-            "RANK : " + rank;
+            "RANK : " + GetRank(totalScore);
 
         ShowResult(result);
 
         Debug.Log(result);
 
-        // 採点後に次のステージボタンを表示
         GameManager gameManager = FindObjectOfType<GameManager>();
 
         if (gameManager != null)
-        {
             gameManager.ShowNextStageButton();
-        }
     }
 
-
-    // =====================================
-    // 形の一致度（50点）
-    // =====================================
-
-    private int CalculateShapeScore()
+    private int CalculateOldShapeScore()
     {
         int correctLines = 0;
 
-        // 横3列の判定
-        if (IsAlignedHorizontally(0, 1, 2))
-            correctLines++;
+        if (IsAlignedHorizontally(0, 1, 2)) correctLines++;
+        if (IsAlignedHorizontally(7, 8, 3)) correctLines++;
+        if (IsAlignedHorizontally(6, 5, 4)) correctLines++;
 
-        if (IsAlignedHorizontally(7, 8, 3))
-            correctLines++;
+        if (IsAlignedVertically(0, 7, 6)) correctLines++;
+        if (IsAlignedVertically(1, 8, 5)) correctLines++;
+        if (IsAlignedVertically(2, 3, 4)) correctLines++;
 
-        if (IsAlignedHorizontally(6, 5, 4))
-            correctLines++;
-
-        // 縦3列の判定
-        if (IsAlignedVertically(0, 7, 6))
-            correctLines++;
-
-        if (IsAlignedVertically(1, 8, 5))
-            correctLines++;
-
-        if (IsAlignedVertically(2, 3, 4))
-            correctLines++;
-
-        // 6本の線で50点
-        float score = (correctLines / 6f) * 50f;
-
-        return Mathf.RoundToInt(score);
+        return Mathf.RoundToInt((correctLines / 6f) * 50f);
     }
 
-
-    // 横方向に並んでいるか
-    private bool IsAlignedHorizontally(int a, int b, int c)
-    {
-        float y1 = shapeRaindrops[a].transform.position.y;
-        float y2 = shapeRaindrops[b].transform.position.y;
-        float y3 = shapeRaindrops[c].transform.position.y;
-
-        float averageY = (y1 + y2 + y3) / 3f;
-
-        return
-            Mathf.Abs(y1 - averageY) <= positionTolerance &&
-            Mathf.Abs(y2 - averageY) <= positionTolerance &&
-            Mathf.Abs(y3 - averageY) <= positionTolerance;
-    }
-
-
-    // 縦方向に並んでいるか
-    private bool IsAlignedVertically(int a, int b, int c)
-    {
-        float x1 = shapeRaindrops[a].transform.position.x;
-        float x2 = shapeRaindrops[b].transform.position.x;
-        float x3 = shapeRaindrops[c].transform.position.x;
-
-        float averageX = (x1 + x2 + x3) / 3f;
-
-        return
-            Mathf.Abs(x1 - averageX) <= positionTolerance &&
-            Mathf.Abs(x2 - averageX) <= positionTolerance &&
-            Mathf.Abs(x3 - averageX) <= positionTolerance;
-    }
-
-
-    // =====================================
-    // 接続の正確さ（30点）
-    // =====================================
-
-    private int CalculateConnectionScore()
+    private int CalculateOldConnectionScore()
     {
         int correctConnections = 0;
 
@@ -234,11 +254,11 @@ public class RaindropConnector : MonoBehaviour
 
         for (int i = 0; i < requiredCount; i++)
         {
-            int startIndex = requiredConnections[i, 0];
-            int endIndex = requiredConnections[i, 1];
+            GameObject requiredStart =
+                shapeRaindrops[requiredConnections[i, 0]];
 
-            GameObject requiredStart = shapeRaindrops[startIndex];
-            GameObject requiredEnd = shapeRaindrops[endIndex];
+            GameObject requiredEnd =
+                shapeRaindrops[requiredConnections[i, 1]];
 
             foreach (Connection connection in connections)
             {
@@ -256,19 +276,13 @@ public class RaindropConnector : MonoBehaviour
             }
         }
 
-        float score = (correctConnections / (float)requiredCount) * 30f;
-
-        return Mathf.RoundToInt(score);
+        return Mathf.RoundToInt(
+            (correctConnections / (float)requiredCount) * 30f
+        );
     }
 
-
-    // =====================================
-    // バランス（20点）
-    // =====================================
-
-    private int CalculateBalanceScore()
+    private int CalculateOldBalanceScore()
     {
-        // 横方向の間隔
         float topSpacing = Mathf.Abs(
             shapeRaindrops[0].transform.position.x -
             shapeRaindrops[2].transform.position.x
@@ -284,7 +298,6 @@ public class RaindropConnector : MonoBehaviour
             shapeRaindrops[4].transform.position.x
         );
 
-        // 縦方向の間隔
         float leftSpacing = Mathf.Abs(
             shapeRaindrops[0].transform.position.y -
             shapeRaindrops[6].transform.position.y
@@ -300,14 +313,12 @@ public class RaindropConnector : MonoBehaviour
             shapeRaindrops[4].transform.position.y
         );
 
-        // 平均間隔
         float averageHorizontal =
             (topSpacing + middleSpacing + bottomSpacing) / 3f;
 
         float averageVertical =
             (leftSpacing + centerSpacing + rightSpacing) / 3f;
 
-        // 間隔のばらつき
         float horizontalDifference =
             Mathf.Abs(topSpacing - averageHorizontal) +
             Mathf.Abs(middleSpacing - averageHorizontal) +
@@ -321,7 +332,6 @@ public class RaindropConnector : MonoBehaviour
         float totalDifference =
             horizontalDifference + verticalDifference;
 
-        // ばらつきが小さいほど高得点
         float score = Mathf.Clamp(
             20f - totalDifference * 2f,
             0f,
@@ -331,6 +341,33 @@ public class RaindropConnector : MonoBehaviour
         return Mathf.RoundToInt(score);
     }
 
+    // =====================================
+    // 横・縦の位置判定
+    // =====================================
+
+    private bool IsAlignedHorizontally(int a, int b, int c)
+    {
+        float y1 = shapeRaindrops[a].transform.position.y;
+        float y2 = shapeRaindrops[b].transform.position.y;
+        float y3 = shapeRaindrops[c].transform.position.y;
+
+        float maxY = Mathf.Max(y1, y2, y3);
+        float minY = Mathf.Min(y1, y2, y3);
+
+        return maxY - minY <= 1f;
+    }
+
+    private bool IsAlignedVertically(int a, int b, int c)
+    {
+        float x1 = shapeRaindrops[a].transform.position.x;
+        float x2 = shapeRaindrops[b].transform.position.x;
+        float x3 = shapeRaindrops[c].transform.position.x;
+
+        float maxX = Mathf.Max(x1, x2, x3);
+        float minX = Mathf.Min(x1, x2, x3);
+
+        return maxX - minX <= 1f;
+    }
 
     // =====================================
     // ランク判定
@@ -338,21 +375,13 @@ public class RaindropConnector : MonoBehaviour
 
     private string GetRank(int score)
     {
-        if (score >= 90)
-            return "S";
-
-        if (score >= 80)
-            return "A";
-
-        if (score >= 60)
-            return "B";
-
-        if (score >= 40)
-            return "C";
+        if (score >= 90) return "S";
+        if (score >= 80) return "A";
+        if (score >= 60) return "B";
+        if (score >= 40) return "C";
 
         return "D";
     }
-
 
     // =====================================
     // 結果表示

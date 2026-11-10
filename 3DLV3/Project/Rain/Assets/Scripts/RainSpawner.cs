@@ -7,7 +7,7 @@ public class RainSpawner : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
 
     [Header("—‰ºİ’è")]
-    [SerializeField] private float fallSpeed = 3f;
+    [SerializeField] private float fallSpeed = 1f;
     [SerializeField] private float moveSpeed = 3f;
 
     [Header("ˆÚ“®”ÍˆÍ")]
