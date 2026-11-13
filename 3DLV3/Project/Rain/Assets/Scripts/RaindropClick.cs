@@ -4,137 +4,175 @@ using UnityEngine;
 public class RaindropClick : MonoBehaviour
 {
     [Header("選択中の色")]
-    [SerializeField] private Color selectedColor = Color.yellow;
+    [SerializeField] private Color selectedColor = Color.red;
 
     [Header("移動設定")]
-    [SerializeField] private float moveSensitivity = 0.2f;
+    [SerializeField] private float moveSpeed = 5f;
+
+    [Header("落下設定")]
+    [SerializeField] private float rapidFallSpeed = 15f;
 
     private Renderer objectRenderer;
     private Color originalColor;
-    private Camera mainCamera;
+    private Rigidbody rb;
+
+    // Wで追加された雨粒専用の色
+    private Color customColor;
+    private bool hasCustomColor = false;
 
     // 現在選択している雨粒
     private static RaindropClick currentSelected;
 
-    // ドラッグ中かどうか
-    private bool isDragging;
+    // 現在操作できる雨粒
+    private static RaindropClick currentFalling;
 
-    // ドラッグ開始時の情報
-    private Vector3 dragStartMousePosition;
-    private Vector3 dragStartObjectPosition;
+    private bool isStopped = false;
+    private float moveDirection;
 
-    // 奥行きを固定する
-    private float fixedZ;
+    private void OnEnable()
+    {
+        currentFalling = this;
+    }
 
     private void Start()
     {
-        // 必要なコンポーネントを取得
         objectRenderer = GetComponent<Renderer>();
-        mainCamera = Camera.main;
+        rb = GetComponent<Rigidbody>();
 
-        // 元の色を保存
         if (objectRenderer != null)
         {
             originalColor = objectRenderer.material.color;
+
+            if (hasCustomColor)
+            {
+                originalColor = customColor;
+                objectRenderer.material.color = customColor;
+            }
         }
 
-        // 最初のZ座標を保存
-        fixedZ = transform.position.z;
-    }
-
-    private void OnMouseDown()
-    {
-        if (objectRenderer == null || mainCamera == null)
+        if (rb == null)
         {
+            Debug.LogError("Rigidbodyがありません！");
             return;
         }
 
-        // すでに別の雨粒が選択されている場合は解除
+        rb.useGravity = true;
+        rb.isKinematic = false;
+
+        Debug.Log("雨粒の操作開始：" + gameObject.name);
+    }
+
+    private void Update()
+    {
+        if (isStopped || currentFalling != this)
+            return;
+
+        moveDirection = 0f;
+
+        // Aキーで左移動
+        if (Input.GetKey(KeyCode.A))
+        {
+            moveDirection = -1f;
+        }
+
+        // Dキーで右移動
+        if (Input.GetKey(KeyCode.D))
+        {
+            moveDirection = 1f;
+        }
+
+        // Sキーで急速落下
+        if (Input.GetKey(KeyCode.S))
+        {
+            Vector3 velocity = rb.linearVelocity;
+            velocity.y = -rapidFallSpeed;
+            rb.linearVelocity = velocity;
+        }
+
+        // Spaceキーで停止
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StopRaindrop();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (isStopped || currentFalling != this)
+            return;
+
+        if (rb == null || rb.isKinematic)
+            return;
+
+        Vector3 movement =
+            Vector3.right * moveDirection * moveSpeed * Time.fixedDeltaTime;
+
+        rb.MovePosition(rb.position + movement);
+    }
+
+    // Wで追加された雨粒の色を設定
+    public void SetNormalColor(Color color)
+    {
+        customColor = color;
+        hasCustomColor = true;
+        originalColor = color;
+
+        if (objectRenderer != null)
+        {
+            objectRenderer.material.color = color;
+        }
+    }
+
+    // 雨粒を停止する
+    private void StopRaindrop()
+    {
+        isStopped = true;
+
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        rb.isKinematic = true;
+
+        if (currentFalling == this)
+        {
+            currentFalling = null;
+        }
+
+        Debug.Log("雨粒を停止：" + gameObject.name);
+    }
+
+    // 雨粒を選択
+    private void OnMouseDown()
+    {
+        if (objectRenderer == null)
+            return;
+
+        // 前の選択を解除
         if (currentSelected != null &&
             currentSelected != this)
         {
             currentSelected.Deselect();
         }
 
-        // この雨粒を選択状態にする
         currentSelected = this;
 
-        // 選択中だけ黄色にする
-        objectRenderer.material.color = selectedColor;
-
-        Debug.Log("雨粒を選択：" + gameObject.name);
-
-        // ドラッグ開始
-        BeginDrag();
-    }
-
-    private void BeginDrag()
-    {
-        isDragging = true;
-
-        // マウスの開始位置を保存
-        dragStartMousePosition = Input.mousePosition;
-
-        // 雨粒の開始位置を保存
-        dragStartObjectPosition = transform.position;
-    }
-
-    private void OnMouseDrag()
-    {
-        if (!isDragging || mainCamera == null)
+        // Wで追加した雨粒以外は赤色にする
+        if (!hasCustomColor)
         {
-            return;
+            objectRenderer.material.color = selectedColor;
         }
 
-        // マウスの移動量を計算
-        Vector3 mouseDelta =
-            Input.mousePosition - dragStartMousePosition;
-
-        // 雨粒の位置をスクリーン座標に変換
-        Vector3 screenPosition =
-            mainCamera.WorldToScreenPoint(
-                dragStartObjectPosition
-            );
-
-        // 左右に移動
-        screenPosition.x +=
-            mouseDelta.x * moveSensitivity;
-
-        // 上下に移動
-        screenPosition.y +=
-            mouseDelta.y * moveSensitivity;
-
-        // ワールド座標に戻す
-        Vector3 newPosition =
-            mainCamera.ScreenToWorldPoint(screenPosition);
-
-        // 奥行き方向には動かさない
-        newPosition.z = fixedZ;
-
-        // 新しい位置を反映
-        transform.position = newPosition;
+        Debug.Log("雨粒を選択：" + gameObject.name);
     }
 
-    private void OnMouseUp()
-    {
-        // マウスを離したらドラッグだけ終了
-        // 選択状態と色は維持する
-        isDragging = false;
-    }
-
-    // 選択を解除して元の色に戻す
+    // 選択を解除
     public void Deselect()
     {
-        // 元の色に戻す
         if (objectRenderer != null)
         {
             objectRenderer.material.color = originalColor;
         }
 
-        // ドラッグを終了
-        isDragging = false;
-
-        // 選択状態を解除
         if (currentSelected == this)
         {
             currentSelected = null;
@@ -143,7 +181,7 @@ public class RaindropClick : MonoBehaviour
         Debug.Log("雨粒の選択を解除：" + gameObject.name);
     }
 
-    // 外部のスクリプトから現在の選択を解除する
+    // 外部から選択解除
     public static void DeselectCurrent()
     {
         if (currentSelected != null)
@@ -152,11 +190,9 @@ public class RaindropClick : MonoBehaviour
         }
     }
 
-    // 現在選択されている雨粒を取得する
+    // 現在選択されている雨粒を取得
     public static RaindropClick GetCurrentSelected()
     {
         return currentSelected;
     }
 }
-
-

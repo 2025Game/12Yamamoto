@@ -11,11 +11,9 @@ public class RaindropConnector : MonoBehaviour
     [Header("採点用の雨粒")]
     [SerializeField] private GameObject[] shapeRaindrops = new GameObject[9];
 
-    [Header("口のCollider判定")]
-    [SerializeField] private Collider topArea;
-    [SerializeField] private Collider rightArea;
-    [SerializeField] private Collider bottomArea;
-    [SerializeField] private Collider leftArea;
+    [Header("採点エリア")]
+    [Tooltip("お題に合わせて採点エリアを登録")]
+    [SerializeField] private Collider[] scoringAreas;
 
     [Header("判定精度")]
     [SerializeField] private int samplesPerLine = 30;
@@ -105,7 +103,7 @@ public class RaindropConnector : MonoBehaviour
 
         if (currentStage == 1)
         {
-            CalculateMouthScore();
+            CalculateAreaScore();
         }
         else
         {
@@ -114,44 +112,59 @@ public class RaindropConnector : MonoBehaviour
     }
 
     // =====================================
-    // 口のCollider採点
+    // 採点エリアによる採点
     // =====================================
 
-    private void CalculateMouthScore()
+    private void CalculateAreaScore()
     {
-        if (topArea == null ||
-            rightArea == null ||
-            bottomArea == null ||
-            leftArea == null)
+        if (scoringAreas == null || scoringAreas.Length == 0)
         {
-            Debug.LogError("口のColliderが設定されていません！");
-            ShowResult("Colliderが設定されていません！");
+            Debug.LogError("採点エリアが設定されていません！");
+            ShowResult("採点エリアが設定されていません！");
             return;
         }
 
-        int score = 0;
+        int passedCount = 0;
 
-        bool topPassed = CheckArea(topArea);
-        bool rightPassed = CheckArea(rightArea);
-        bool bottomPassed = CheckArea(bottomArea);
-        bool leftPassed = CheckArea(leftArea);
+        string result = "";
 
-        if (topPassed) score += 25;
-        if (rightPassed) score += 25;
-        if (bottomPassed) score += 25;
-        if (leftPassed) score += 25;
+        for (int i = 0; i < scoringAreas.Length; i++)
+        {
+            if (scoringAreas[i] == null)
+            {
+                Debug.LogError(
+                    "採点エリアの " + i + " 番目が未設定です。"
+                );
 
-        string result =
+                ShowResult("採点エリアの設定を確認してください！");
+                return;
+            }
+
+            bool passed = CheckArea(scoringAreas[i]);
+
+            if (passed)
+                passedCount++;
+
+            result += "エリア " + (i + 1) + " : "
+                + (passed ? "OK" : "未通過") + "\n";
+        }
+
+        float scoreRate = passedCount / (float)scoringAreas.Length;
+
+        int score = Mathf.RoundToInt(scoreRate * 100f);
+
+        string finalResult =
             "SCORE : " + score + " / 100\n\n" +
-            "上側 : " + (topPassed ? "OK" : "未通過") + "\n" +
-            "右側 : " + (rightPassed ? "OK" : "未通過") + "\n" +
-            "下側 : " + (bottomPassed ? "OK" : "未通過") + "\n" +
-            "左側 : " + (leftPassed ? "OK" : "未通過");
+            "通過エリア : " + passedCount +
+            " / " + scoringAreas.Length + "\n\n" +
+            result;
 
-        ShowResult(result);
+        ShowResult(finalResult);
 
-        Debug.Log(result);
+        Debug.Log(finalResult);
+
         GameManager gameManager = FindObjectOfType<GameManager>();
+
         if (gameManager != null)
             gameManager.ShowNextStageButton();
     }
